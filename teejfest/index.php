@@ -121,8 +121,7 @@
 									$validation='';
 								}
 							}
-							
-							//print '<pre>';print_r($_SESSION);
+                            
 						?>
 					</ul>
                     <div class="form-group">
