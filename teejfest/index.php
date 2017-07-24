@@ -146,6 +146,7 @@
                             
 						?>
 					</ul>
+                    <?php if( $_SESSION['attempts_denied'] != 1 ) {?> 
                     <div class="form-group">
                         <input type="text" name="username" class="form-control" placeholder="User Name" autocomplete="off" />
                     </div>
@@ -156,6 +157,7 @@
                         <input type="text" name="captcha" id="captcha" class="form-control" placeholder="captcha" />
                         <img id="captcha_code" src="../captcha.php" />
                     </div>
+                    <?php } ?>
                 </div>
                 <div class="footer">
                     <button type="submit" class="btn bg-olive btn-block">Sign me in</button>

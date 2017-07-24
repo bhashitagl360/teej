@@ -43,6 +43,7 @@
 
             	if($Denied == 1) {
 
+            		$_SESSION['attempts_denied'] = 1;
 	        		$_SESSION['Denied'] = "Ask Administrator to provide you access again!";
 
             	}
