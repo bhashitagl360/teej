@@ -9,8 +9,39 @@
 
     $error  = '';
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $user_name =  $_POST['username'];
-        $password =  md5($_POST['password']);
+		
+		  $errors = array();
+        
+		  if( empty( $_POST['username'] )) {
+			  $errors['username'] = "Please enter username!";
+		  }
+		  
+		  if ( !empty( $_POST['username'] ) &&  !preg_match('/^[a-zA-Z]*$/', $_POST['username'])) { 
+			  $errors['valid_name'] = "Please enter valid username!";
+		  }
+		  
+		  if( empty( $_POST['password'] )) {
+			  $errors['password'] = "Please enter password!";
+		  }
+        
+          if( empty( $_POST['captcha'] )) {
+			  $errors['captcha_error'] = "Please fill your captcha code";
+		  }
+		  
+		  if( !empty( $_POST['captcha'] ) && $_POST['captcha'] != $_SESSION["captcha_code"] ) {
+			  $errors['incorrect_captcha'] = "Your Captcha code is incorrect";
+		  }
+		  
+		  
+		  if( count( $errors ) > 0 ) {
+			  $_SESSION['validations'] = $errors;
+			  header("location: dashboard.php");
+			  exit();
+		  }
+		  
+		  $user_name =  $_POST['username'];
+		  $password =  md5($_POST['password']);
+		  $captcha =  $_POST['captcha'];
 
         /* Prepared statement, stage 1: prepare */
 
@@ -41,7 +72,10 @@
                 }
                 header("location: dashboard.php");
             }else{
-                $error = "Your Login Name or Password is invalid";
+                $errors['wrong_password'] = "Your Login Name or Password is invalid";
+                $_SESSION['validations'] = $errors;
+				header("location: dashboard.php");
+				exit();
             }  
 
             /* free results */
@@ -78,11 +112,28 @@
             <div class="header">Sign In</div>
             <form method="post">
                 <div class="body bg-gray">
+					<ul>
+						<?php
+							
+							if( count( $_SESSION['validations'] ) > 0 ) {
+								foreach ( $_SESSION['validations'] as $validation ) {
+									echo '<li>'.$validation.'</li>';
+									$validation='';
+								}
+							}
+							
+							//print '<pre>';print_r($_SESSION);
+						?>
+					</ul>
                     <div class="form-group">
-                        <input type="text" name="username" class="form-control" placeholder="User ID"/>
+                        <input type="text" name="username" class="form-control" placeholder="User Name" autocomplete="off" />
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password"/>
+                        <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off"  />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="captcha" id="captcha" placeholder="captcha" />
+                        <img id="captcha_code" src="../captcha.php" />
                     </div>
                 </div>
                 <div class="footer">
