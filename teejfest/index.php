@@ -1,5 +1,11 @@
 <?php
-   require_once "../inc/config.php";
+
+    require_once "inc/attamps.php";
+    require_once "../inc/config.php";
+
+    confirmIPAddress( $mysqli, $ip_address );
+
+
 
     $uid = $_SESSION['login_user'];
     if((isset($uid))){
@@ -40,8 +46,12 @@
                     $_SESSION['user_name'] = $user_name;
                 }
                 header("location: dashboard.php");
+                exit();
             }else{
                 $error = "Your Login Name or Password is invalid";
+                $ip_address = get_client_ip();
+                addLoginAttempt( $mysqli, $ip_address );
+
             }  
 
             /* free results */
