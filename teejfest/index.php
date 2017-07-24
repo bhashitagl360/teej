@@ -40,7 +40,7 @@
 		  }
 		  
 		  $user_name =  $_POST['username'];
-		  $password =  md5($_POST['password']);
+		  $password =  md5( $_POST['password'] );
 		  $captcha =  $_POST['captcha'];
 
         /* Prepared statement, stage 1: prepare */
