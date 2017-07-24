@@ -23,7 +23,7 @@
         $connection = array(
             'h' => 'localhost',
             'u' => 'root',
-            'p' => 'root',
+            'p' => '',
             'd' => 'teej',
         );
     /*
