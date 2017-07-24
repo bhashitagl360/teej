@@ -2,8 +2,8 @@
     require_once "inc/admin.php"; 
 
     $id = '0';
-    if( isset( $_REQUEST['id'] ) &&  !empty( $_REQUEST['id'] ) ) {
-        $id = $_REQUEST['id'];
+    if( isset( $_GET['id'] ) &&  !empty( $_GET['id'] ) ) {
+       $id =  ( int ) $_GET['id'];
     }
 
     if( !empty( $id ) ) {

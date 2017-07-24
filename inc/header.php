@@ -54,11 +54,11 @@
 	  	<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-			  <img src="images/banner1.jpg" alt="" class="bannerimage" />		
+			  <img src="images/1.jpg" alt="" class="bannerimage" />		
 				
 			</div>
 			<div class="item">
-			  <img src="images/banner2.jpg" alt="" class="bannerimage" />		
+			  <img src="images/2.jpg" alt="" class="bannerimage" />		
 				
 			</div>
 			<div class="item">

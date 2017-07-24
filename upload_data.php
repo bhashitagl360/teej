@@ -124,8 +124,9 @@
     } else {
 	    $newImageFileName = '';
     } 
-   
+  
     if (move_uploaded_file($_FILES["upload_file"]["tmp_name"], $ImageFilePath)) { 
+
       $upload = $mysqli->prepare("INSERT INTO visitor (firstname, email, message, image, document_type) VALUES (?, ?, ?, ?, ?)");
 	    $upload->bind_param("sssss", $_POST['vistior_name'], $_POST['vistior_email'], $visitor_msg, $newImageFileName, $document_type);
 	    $upload->execute();
