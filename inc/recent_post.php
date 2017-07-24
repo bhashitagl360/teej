@@ -18,11 +18,10 @@
 									<a href="javascript:void(0)" class="loadmore">
 										<img src="images/more_button.png" alt="Load More" />
 									</a>
-									<a href="javascript:void(0)" onclick="share_teej_form('<?php echo siteUrl; ?>', '<?php echo shareTitle; ?>');">
+									<a href="javascript:void(0)" onclick="share_teej_form();">
 										<img src="images/upload.png" alt="" />
 									</a>
 									<input type="hidden" id="result_no" value="10" />
-									<input type="hidden" id="webUrl" webUrl="<?php echo siteUrl; ?>" />
 								</div>
 							</div>
 						</div>

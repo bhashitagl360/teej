@@ -6,20 +6,39 @@
 			</div>
 			<div class="menubx">
 				<?php
+
 					$menuQuery = "SELECT name, slug FROM menu order by position";
-					$result = $mysqli->query($menuQuery);
-					if ($result->num_rows > 0) {
+
+					/* prepare statement */
+					$menu = $mysqli->prepare( $menuQuery );
+
+					// raise issue if false
+					if($menu === false) {
+	                    die('Wrong Menu Insert SQL: ' . $menuQuery . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error);
+	                }
+
+		            /* execute query */
+		            $menu->execute();
+
+		            /* store result */
+		            $menu->store_result();
+
+		            /* Bind the result to variables */
+		            $menu->bind_result($name, $slug);
+
+					if ($menu->num_rows > 0) {
+						
 				?>
 				<ul>
-					<?php while($row = $result->fetch_assoc()) { $slug=$row['slug']; ?>
+					<?php while ( $menu->fetch() ) { ?>
 						<li>
-							<a href="javascript:void(0)" onclick="menu( '<?php echo siteUrl; ?>', '<?php echo $slug; ?>');">
-							<?php echo $row['name']; ?>
+							<a href="javascript:void(0)" onclick="menu( '<?php echo base64_encode( $slug ); ?>' );">
+							<?php echo $name; ?>
 							</a>
 						</li>
 					<?php } ?>
 				</ul>
-				<?php } ?>
+				<?php } /* free results */$menu->free_result(); ?>
 			</div>
 		</div>
 	</header>
@@ -53,7 +72,7 @@
 		</div>
 	  
 		<div class="carousel-caption">
-			<p onclick="share_teej_form('<?php echo siteUrl; ?>');">Shuru Karo #TeejTaiyyari</p>
+			<p onclick="share_teej_form();">Shuru Karo #TeejTaiyyari</p>
 		</div>
 		<div class="dummyimage">
 			<img src="images/banner_below.png" alt="" />

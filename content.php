@@ -2,15 +2,21 @@
 	require_once 'inc/config.php';
 
 	$json=array();
-	$mSlug = $_POST['slug'];
+	$post_data = $_POST['slug'];
 
-	if( !empty( $mSlug ) ) { 
+	if( !empty( $post_data ) ) { 
+
+        $post_name = base64_decode( $post_data );
 
 		$cmsQuery = "SELECT title, description, image FROM cms WHERE slug=?";
-        if ($slug = $mysqli->prepare($cmsQuery)) {
+        if ( $slug = $mysqli->prepare( $cmsQuery ) ) {
+
+            if($slug === false) {
+                die('Wrong CMS content SQL: ' . $cmsQuery . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error);
+            }
 
             /* bind param */
-            $slug->bind_param("s", $mSlug);
+            $slug->bind_param( "s", $post_name );
 
             /* execute query */
             $slug->execute();
@@ -31,12 +37,14 @@
                    $json['image'] = $image;
                 }
             }else{
-                $json['error'] = "Menu Popup Query Issue: There is some issue with the menu query!";
+                $json['error'] = "There is no result matching your";
             }  
 
             /* free results */
             $slug->free_result();
 
+        } else {
+            $json['error'] = "Menu Popup Query Issue: There is some issue with the menu query!";
         }
 	} else {
 		$json['error'] = "Menu Popup Query Issue: Slug is empty!";
