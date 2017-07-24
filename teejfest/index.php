@@ -79,10 +79,10 @@
             <form method="post">
                 <div class="body bg-gray">
                     <div class="form-group">
-                        <input type="text" name="username" class="form-control" placeholder="User ID"/>
+                        <input type="text" name="username" class="form-control" placeholder="User ID" AUTOCOMPLETE="off" />
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password"/>
+                        <input type="password" name="password" class="form-control" placeholder="Password" AUTOCOMPLETE="off" />
                     </div>
                 </div>
                 <div class="footer">
