@@ -4,12 +4,12 @@
 			<div class="col-xs-12">
 				<div class="innr_contentbox">
 					<h1><img src="images/heading.png" alt="" /></h1>
-					<p>“Padhaaro maahre des..” says the Teej ready land of the pink city! 
-It’s all set to brighten up your celebrations with the shades of Rajasthani tradition - Folk dances and songs, Mehndi and churis, Ghewar and more. Words alone can’t do justice to something we regard as an ‘experience’. So, we would like to invite you for a Teejful experience in Jaipur, July 26-27, Tripolia Gate, 6pm onwards.
-					<a class="readbox" href="javascript:void(0)" onclick="menu( '<?php echo base64_encode( 'about_teej' ) ?>' );">
+					<p>Teej festival is held every year during the Hindu month of Shravan and marks the advent of the monsoon. The onset of monsoon is a time to celebrate as the rain brings water to the parent land.</p>
+
+					<p>The Teej Festival is dedicated to Goddess Parvati and commemorates the day when she was united with Lord Shiva. Young girls, newly wed women and elderly women can be seen attired in traditional costumes or in special multicolored striped pattern Laharia Sari and ornaments. They can be seen applying henna to decorate their hands and singing songs of love and enjoying flower bedecked swings, which are hung on trees.</p>
+					<p><a class="readbox" href="javascript:void(0)" onclick="menu( '<?php echo base64_encode( 'about_teej' ) ?>' );">
 						Read more...
-					</a>
-					</p>
+					</a></p>
 					
 				</div>
 			</div>

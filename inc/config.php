@@ -8,19 +8,22 @@
     */
     session_start();
     error_reporting(1);
+    ini_set('session.cookie_httponly', 1);
+    ini_set('session.use_only_cookies', 1);
+    ini_set('session.cookie_secure', 1);
     //    print '<pre>';print_r($_SERVER);die('vip');
     /*
         ***************************************************
             Connection Vars
         ***************************************************
     */
-        define('siteUrl', 'http://teej.yofroggy.biz');
+        define('siteUrl', 'http://localhost/teej');
 
         $connection = array(
             'h' => 'localhost',
-            'u' => 'teej_dbuser',
-            'p' => 'UX4Dop!q_MhnQ',
-            'd' => 'teej_db',
+            'u' => 'root',
+            'p' => '',
+            'd' => 'teej',
         );
     /*
         ***************************************************
