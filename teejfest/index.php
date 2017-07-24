@@ -1,5 +1,10 @@
 <?php
-   require_once "../inc/config.php";
+    
+    require_once "../inc/config.php";
+    require_once "inc/attamps.php";
+
+    $ip_address = get_client_ip();
+    $confirm = confirmIPAddress( $mysqli, $ip_address );
 
     $uid = $_SESSION['login_user'];
     if((isset($uid))){
@@ -9,14 +14,47 @@
 
     $error  = '';
     if($_SERVER["REQUEST_METHOD"] == "POST") {
+		
+		$errors = array();
+        
+        if( empty( $_POST['username'] )) {
+            $errors['username'] = "Please enter username!";
+        }
+          
+        if ( !empty( $_POST['username'] ) &&  !preg_match('/^[a-zA-Z]*$/', $_POST['username'])) { 
+            $errors['valid_name'] = "Please enter valid username!";
+        }
+          
+        if( empty( $_POST['password'] )) {
+            $errors['password'] = "Please enter password!";
+        }
+        
+        if( empty( $_POST['captcha'] )) {
+            $errors['captcha_error'] = "Please fill your captcha code";
+        }
+          
+        if( !empty( $_POST['captcha'] ) && $_POST['captcha'] != $_SESSION["captcha_code"] ) {
+            $errors['incorrect_captcha'] = "Your Captcha code is incorrect";
+        }
+          
+          
+        if( count( $errors ) > 0 ) {
+            $_SESSION['validations'] = $errors;
+            header("location: dashboard.php");
+            exit();
+        }
+          
         $user_name =  $_POST['username'];
-        $password =  md5($_POST['password']);
+        $password =  md5( $_POST['password'] );
 
         /* Prepared statement, stage 1: prepare */
-
-
         $loginQuery = "SELECT id, role_id, user_name FROM admin WHERE user_name =? AND password =?";
+
         if ($login = $mysqli->prepare($loginQuery)) {
+
+            if($login === false) {
+                die('Wrong User content SQL: ' . $loginQuery . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error);
+            }
 
             /* bind param */
             $login->bind_param("ss", $user_name, $password);
@@ -40,8 +78,17 @@
                     $_SESSION['user_name'] = $user_name;
                 }
                 header("location: dashboard.php");
+                exit();
             }else{
-                $error = "Your Login Name or Password is invalid";
+
+                /* Default vars */
+                addLoginAttempt( $mysqli, $ip_address );
+                /* err msg */
+                $errors['wrong_password'] = "Your Login Name or Password is invalid";
+                $_SESSION['validations'] = $errors;
+                /* redirect */
+				header("location: dashboard.php");
+				exit();
             }  
 
             /* free results */
@@ -78,17 +125,40 @@
             <div class="header">Sign In</div>
             <form method="post">
                 <div class="body bg-gray">
+					<ul>
+						<?php
+							//print '<pre>';print_r($_SESSION);die;    
+							if( count( $_SESSION['validations'] ) > 0 ) {
+								foreach ( $_SESSION['validations'] as $validation ) {
+                                    if( !empty ( $validation ) ) {
+                                        echo '<li>'.$validation.'</li>';    
+                                    }
+								}
+
+                                $_SESSION['validations']='';
+							}
+
+                            if( isset( $_SESSION['Denied'] ) ){
+
+                                 echo '<li>'.$_SESSION['Denied'].'</li>';  
+                                unset( $_SESSION['Denied'] );
+                            }
+                            
+						?>
+					</ul>
                     <div class="form-group">
-                        <input type="text" name="username" class="form-control" placeholder="User ID" AUTOCOMPLETE="off" />
+                        <input type="text" name="username" class="form-control" placeholder="User Name" autocomplete="off" />
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password" AUTOCOMPLETE="off" />
+                        <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off"  />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="captcha" id="captcha" class="form-control" placeholder="captcha" />
+                        <img id="captcha_code" src="../captcha.php" />
                     </div>
                 </div>
                 <div class="footer">
                     <button type="submit" class="btn bg-olive btn-block">Sign me in</button>
-                    <p><?php echo $error; ?></p>
-                    <!-- <a href="register.html" class="text-center">Register a new membership</a> -->
                 </div>
             </form>
         </div>
