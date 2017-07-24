@@ -67,6 +67,4 @@
     }
     
     
-    $aaaa= 'http://localhost/teej';
-    
 ?>
