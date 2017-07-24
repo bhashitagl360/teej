@@ -2,7 +2,7 @@
     /*
         ***************************************************
             Connection File
-            Project Name: LG
+            Project Name: Teej
             Author: Vipin Ganganiya
         ***************************************************
     */
@@ -15,11 +15,12 @@
         ***************************************************
     */
         define('siteUrl', 'http://localhost/teej');
+        define('siteAdminUrl', 'http://localhost/teej/teejfest/');
 
         $connection = array(
             'h' => 'localhost',
             'u' => 'root',
-            'p' => '',
+            'p' => 'root',
             'd' => 'teej',
         );
     /*
@@ -61,4 +62,8 @@
         $ext = array_pop($ext);
         return strtolower($ext);
     }
+    
+    
+    $aaaa= 'http://localhost/teej';
+    
 ?>
