@@ -17,13 +17,13 @@
             Connection Vars
         ***************************************************
     */
-        define('siteUrl', 'http://localhost/teej');
+        define('siteUrl', 'http://teej.yofroggy.biz');
 
         $connection = array(
             'h' => 'localhost',
-            'u' => 'root',
-            'p' => '',
-            'd' => 'teej',
+            'u' => 'teej_dbuser',
+            'p' => 'UX4Dop!q_MhnQ',
+            'd' => 'teej_db',
         );
     /*
         ***************************************************
