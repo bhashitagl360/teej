@@ -31,8 +31,14 @@
     }
   }
 
+  //print '<pre>';print_r( $_FILES );die(' rs');
+
   if ( trim( $_POST['visitor_msg'] ) == '' && ( $_FILES['upload_file']['size'] == 0 && $_FILES['upload_file']['name'] == '' ) ) {
     $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please add your comment or upload image/video!");
+
+    if ( $_FILES['upload_file']['error']  == 1 ) {
+      $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Your file size is exceeding to 5M");
+    }
   }
 	
   if( empty( $_POST['captcha'] )) {

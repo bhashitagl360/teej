@@ -8,13 +8,13 @@
     */
     session_start();
     error_reporting(1);
-//    print '<pre>';print_r($_SERVER);die('vip');
+    //    print '<pre>';print_r($_SERVER);die('vip');
     /*
         ***************************************************
             Connection Vars
         ***************************************************
     */
-        define('siteUrl', 'http://localhost/teej/');
+        define('siteUrl', 'http://localhost/teej');
 
         $connection = array(
             'h' => 'localhost',
