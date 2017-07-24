@@ -20,7 +20,7 @@
         $connection = array(
             'h' => 'localhost',
             'u' => 'root',
-            'p' => 'root',
+            'p' => '',
             'd' => 'teej',
         );
     /*
@@ -32,7 +32,7 @@
     define( 'site_title', 'Teej Taiyyari | Rajasthan Tourism' );
     define( 'documentRoot',  $_SERVER['DOCUMENT_ROOT'] );
     define( 'TBL_ATTEMPTS', 'LoginAttempts');
-    define( 'TIME_PERIOD', '30 ');
+    define( 'TIME_PERIOD', '1440');
 
     $gooleApi = array(
         'fonts.googleapis' => 'https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900');

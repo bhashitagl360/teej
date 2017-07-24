@@ -26,46 +26,45 @@
         $num_of_rows = $confirmIP->num_rows;
 
         /* Bind the result to variables */
-        $confirmIP->bind_result($ip, $attempts, $lastlogin);
+        $confirmIP->bind_result($attempts, $Denied);
 
         /*initialize a array() */
         $json = array();
-        $msg = array();
 
         if ($num_of_rows >= "1") {
 
-            while ($user->fetch()) {
-                $json['ip'] = $ip;
-                $json['attempts'] = $attempts;
-                $json['Denied'] = $lastlogin;
-            }
+        	$confirmIP->fetch();
+            // while ($confirmIP->fetch()) {
+            //     $json['attempts'] = $attempts;
+            //     $json['Denied'] = $Denied;
+            // }
 
-            if ($json["attempts"] >= 5) {
+            if ($attempts > 3) {
 
-            	if($json["Denied"] == 1) {
+            	if($Denied == 1) {
 
-	        		$msg['denied'] = "Ask Administrator to provide you access again!";
-	        		$_SESSION['validations'] = $msg;
-	        		header("location: index.php");
-         			exit();
+	        		$_SESSION['Denied'] = "Ask Administrator to provide you access again!";
 
             	}
 	        }
 
         }
 
+        $confirmIP->free_result();
+
         $confirmIP->close();
-        $mysqli->close();
+        //$mysqli->close();
     }
 	
     function addLoginAttempt( $mysqli, $jp_address ) {
 
-       $loginAttampQuery = "SELECT * FROM LoginAttempts WHERE ip=?";
-       //die( $loginAttampQuery );
-       $loginAttamp = $mysqli->prepare( $loginAttampQuery );
 
-       //die( $loginAttamp );
-       if($loginAttamp === false) {
+        $loginAttampQuery = "SELECT attempts FROM LoginAttempts WHERE ip=?";
+       	//die( $loginAttampQuery );
+        $loginAttamp = $mysqli->prepare( $loginAttampQuery );
+
+       //	die( $loginAttamp );
+        if($loginAttamp === false) {
             die('Wrong User content SQL: ' . $loginAttampQuery . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error);
         }
 
@@ -82,18 +81,16 @@
         $num_of_rows = $loginAttamp->num_rows;
 
         /* Bind the result to variables */
-        $loginAttamp->bind_result($ip, $attempts, $lastlogin);
+        $loginAttamp->bind_result( $attempts );
 
         /*initialize a array() */
         $json = array();
 
         if ($num_of_rows >= "1") {
+        	//die( 'ssssdfsdf');
+            $loginAttamp->fetch();
 
-            while ($loginAttamp->fetch()) {
-                $json['attempts'] = $attempts;
-            }
-
-            $attempts = $json["attempts"]+1;
+            $attempts = $attempts+1;
             $updateAttamps = $mysqli->prepare( "UPDATE ".TBL_ATTEMPTS." SET attempts=? WHERE ip=?" );
             if($updateAttamps === false) {
                 die('Wrong Menu Update SQL: ' . $updateAttampsQuery . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error);
@@ -117,7 +114,7 @@
         }
 
         $loginAttamp->close();
-        $mysqli->close();
+        //$mysqli->close();
 
     }
 
@@ -131,7 +128,7 @@
         $updateClearAttamps->bind_param("s", $jp_address);
         $updateClearAttamps->execute();
         $updateClearAttamps->close();
-        $mysqli->close();
+        //$mysqli->close();
     }
 
 
