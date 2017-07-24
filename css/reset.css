@@ -1,0 +1,44 @@
+
+*{outline: none;}
+*::-moz-selection{background:#ffa200; color:#fff; text-shadow:none;} 
+body, html{ margin:0; padding:0; height:100%; font-size:13px;}
+label{display: block; font-weight:normal;}
+h1, h2, h3, h4, h5, h6, ul{font-weight:normal; margin:0; padding:0; }
+ul, li{ list-style:none; margin:0; padding:0;}
+img{vertical-align:middle; border:none}
+p{font-size:13px; padding:0; color:#666; line-height:22px; display:block;  margin:0;}
+a, input, select, textarea, .btn {transition: all 0.25s ease-in 0s; -webkit-transition: all 0.25s ease-in 0s; -moz-transition: all 0.25s ease-in 0s; -o-transition: all 0.25s ease-in 0s; outline:none;  text-decoration:none;}
+a{ color:#666;}
+a:hover{ outline:none; cursor:pointer; color:#212121; text-decoration:none;}
+a:focus {outline:none; text-decoration:none}
+.full-width{float:left; width:100%;}
+.relative{position:relative}
+.full-img{ width:100%;}
+.float-left{ float:left;}
+.float-right{ float:right;}
+
+textarea, input[type="text"], input[type="password"], input[type="email"], input[type="file"], select, input[type="number"]{transition:all 0.25s ease-in 0s; -webkit-transition:all 0.25s ease-in 0s; width:100%;}
+button{transition:all 0.25s ease-in 0s; -webkit-transition:all 0.25s ease-in 0s;}
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="file"]:focus, select:focus, input[type="number"]:focus{ outline:none; transition-duration: 0.1s; box-shadow:none;}
+.form-control{ box-shadow:none; padding:0 10px; border-radius:0;}
+.form-control:focus{ box-shadow:none;}
+
+/*Custome Margin, Padding*/
+.marginnone{margin:0;}
+.margintop10{margin-top:10px;}
+.margintop20{margin-top:20px;}
+.margintop30{margin-top:30px;}
+.margintop40{margin-top:40px;}
+.marginbottom10{margin-bottom:10px;}
+.marginbottom20{margin-bottom:20px;}
+.marginbottom30{margin-bottom:30px;}
+.marginbottom40{margin-bottom:40px;}
+.paddingnone{padding:0;}
+.paddingtop10{padding-top:10px;}
+.paddingtop20{padding-top:20px;}
+.paddingtop30{padding-top:30px;}
+.paddingtop40{padding-top:40px;}
+.paddingbottom10{padding-bottom:10px;}
+.paddingbottom20{padding-bottom:20px;}
+.paddingbottom30{padding-bottom:30px;}
+.paddingbottom40{padding-bottom:40px;}
