@@ -1,6 +1,6 @@
 <?php
 	require_once 'inc/config.php';
-  $totalBytesToUpload = 2000000; // 2gb
+  $totalBytesToUpload = 5000000; // 2M
 
   $match = array("image/png","image/jpg","image/jpeg","video/mp4");
 	$visitor_msg = htmlspecialchars( addslashes( $_POST['visitor_msg'] ), ENT_QUOTES, 'UFT-8' );
@@ -79,9 +79,9 @@
         		$errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please upload image or video files only!");
       	}
 
-        if( !in_array($extension, $allowedExts) ) {
-          $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please upload image or video files only!");
-        }
+        // if( !in_array($extension, $allowedExts) ) {
+        //   $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please upload image or video files only!");
+        // }
 
         $pos = strpos($_FILES['upload_file']['name'],'php');
         if(!($pos === false)) {
