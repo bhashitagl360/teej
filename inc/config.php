@@ -14,6 +14,7 @@
         ***************************************************
     */
         define('siteUrl', 'http://teej.yofroggy.biz');
+	define('siteAdminUrl', 'http://teej.yofroggy.biz/teejfest');
 
         $connection = array(
             'h' => 'localhost',

@@ -1,5 +1,7 @@
-ErrorDocument 404 http://localhost/teej/404.php
+RewriteEngine On
+ErrorDocument 404 /404.php
  
 #Advanced Cookie Manager
 #php_value session.cookie_httponly 1  
 #php_value session.cookie_secure 1
+
