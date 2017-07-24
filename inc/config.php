@@ -8,10 +8,6 @@
     */
     session_start();
     error_reporting(1);
-    ini_set('session.cookie_httponly', 1);
-    ini_set('session.use_only_cookies', 1);
-    ini_set('session.cookie_secure', 1);
-    //    print '<pre>';print_r($_SERVER);die('vip');
     /*
         ***************************************************
             Connection Vars
@@ -23,7 +19,7 @@
         $connection = array(
             'h' => 'localhost',
             'u' => 'root',
-            'p' => 'root',
+            'p' => '',
             'd' => 'teej',
         );
     /*
@@ -65,6 +61,5 @@
         $ext = array_pop($ext);
         return strtolower($ext);
     }
-    
     
 ?>
