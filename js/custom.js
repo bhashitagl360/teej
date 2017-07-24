@@ -11,7 +11,8 @@ $(function(){
 	Used: using ajax on submit call.
 **********************************************/
 
-function share_teej_form( siteUrl ) {
+function share_teej_form() {
+
 	var share = '';
 
 	share += ' <form id="upload-formordercnf" method="post" enctype="multipart/form-data">';
@@ -61,7 +62,6 @@ function share_teej_form( siteUrl ) {
 		      	share += '</div>';
 		    share += '</div>';
 		share += '</div>';
-		share += '<input type="hidden" siteurl="'+siteUrl+'" id="siteUrl" />';
 	share += '</form>';
 
 	$("#popupContent").html( share );
@@ -80,18 +80,17 @@ jQuery(document).ready(function($) {
    		e.preventDefault();
         var form_data = new FormData(this); //Creates new 
  		
- 		var siteUrl = $("#siteUrl").attr('siteUrl');
         $.ajax({
             type: 'POST',
             dataType: 'json',
-            url: siteUrl+'/upload_data.php',
+            url: siteURL+'/upload_data.php',
             data: form_data,
             contentType: false,
             cache: false,
             processData:false,
             beforeSend: function() {
                 $('#confirm-upload').attr('disabled', true);
-                $('#confirm-upload').after('<span class="wait2"><img src="'+siteUrl+'/images/ajax-loader.gif" alt="loading" class="wait" /></span>');
+                $('#confirm-upload').after('<span class="wait2"><img src="'+siteURL+'/images/ajax-loader.gif" alt="loading" class="wait" /></span>');
             },
             complete: function() {
                $('#confirm-upload').attr('disabled', false);
@@ -150,14 +149,19 @@ function browse() {
 	Used: on header block for menu a tag click
 **********************************************/
 
-function menu( siteUrl, name ) {
+function menu( name ) {
+
+	if(  name == '' ||  name  == 'undefined' ) {
+		return false;
+	}
+
 	$.ajax({
         type: "Post",
-        data: {'slug': name},
-        url: siteUrl+'/content.php',
+        data: {'slug':  name },
+        url: siteURL+'/content.php',
         dataType: 'json',
         beforeSend: function() {
-            $('#addUserDetails').after('<img style="absolute: relative: right: -40px; top: -10px" src="'+siteUrl+'/images/ajax-loader.gif" alt="" class="attention" />');
+            $('#addUserDetails').after('<img style="absolute: relative: right: -40px; top: -10px" src="'+siteURL+'/images/ajax-loader.gif" alt="" class="attention" />');
             $('#addUserDetails').attr('disabled', true);
         },
         complete: function() {
@@ -165,7 +169,7 @@ function menu( siteUrl, name ) {
            $(".attention").remove();
         },
         success: function (json) {
-            getPopup( 'menu', siteUrl, json );
+            getPopup( 'menu', json );
         }
     });
 }
@@ -199,10 +203,10 @@ function user_popup( siteUrl, id ) {
 	$.ajax({
         type: "Post",
         data: {'id': id},
-        url: siteUrl+'/user_content.php',
+        url: siteURL+'/user_content.php',
         dataType: 'json',
         success: function (json) {
-            getPopup( 'user', siteUrl, json );
+            getPopup( 'user', json );
         }
     });
 }
@@ -211,7 +215,7 @@ function user_popup( siteUrl, id ) {
 	(): Custom Model Popup HTML
 	Used: show case wrapped dynamic code...
 **********************************************/
-function getPopup( type, siteUrl, data ) {
+function getPopup( type, data ) {
 	var html = '';
 
   	html += '<div class="modal-dialog modal-lg">';
@@ -242,13 +246,13 @@ function getPopup( type, siteUrl, data ) {
 						case "user":
 
 							if( data.document_type == 'image' && data.image != '') {
-								var imageURL = siteUrl+'/upload/'+data.image;;
+								var imageURL = siteURL+'/upload/'+data.image;;
 								html += '<img src="'+imageURL+'" alt="" class="imagepop" />';
 							}
 
 							if( data.document_type == 'video' && data.image != '') {
 
-								var videoURL = siteUrl+'/upload/'+data.image;
+								var videoURL = siteURL+'/upload/'+data.image;
 								html += '<p> <video controls>';
 									html += '<source src="'+videoURL+'" type="video/mp4">';
 									html += 'Your browser does not support the video tag.';
@@ -282,15 +286,15 @@ function getPopup( type, siteUrl, data ) {
 	$('#popupContent').modal( 'toggle' );
 }
 
-function recent_posts( siteUrl ) {
+function recent_posts() {
 	
     $.ajax({
         type: "POST",
         data: {'a': 'b'},
-        url: siteUrl+'/recent_post.php',
+        url: siteURL+'/recent_post.php',
         dataType: 'json',
         beforeSend: function() {
-            $('#recent_posts').after('<span class="wait2"><img src="'+siteUrl+'/images/ajax-loader.gif" alt="loading" class="wait" /></span>');
+            $('#recent_posts').after('<span class="wait2"><img src="'+siteURL+'/images/ajax-loader.gif" alt="loading" class="wait" /></span>');
         },
         complete: function() {
            $('.wait2').remove();
@@ -306,10 +310,8 @@ function recent_posts( siteUrl ) {
 $(document).on('click', '.loadmore', function (e) {	
 	e.stopImmediatePropagation();
    	e.preventDefault();
-    //$(this).text('Loading...');
-    var siteUrl = $("#webUrl").attr('webUrl');
     $.ajax({
-        url: siteUrl+'/loadmore.php',
+        url: siteURL+'/loadmore.php',
         type: 'POST',
         data: {
             page: $('#result_no').val()

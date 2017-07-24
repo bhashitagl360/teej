@@ -4,5 +4,5 @@
 	}
 ?>
 <script type="text/javascript">
-	$( window ).on( "load", recent_posts( '<?php echo siteUrl; ?>' ) );
+	$( window ).on( "load", recent_posts() );
 </script>

@@ -1,11 +1,15 @@
 <?php
 	require_once 'inc/config.php';
-  $totalBytesToUpload = 2048; // 2gb
+  $totalBytesToUpload = 2000000; // 2gb
 
   $match = array("image/png","image/jpg","image/jpeg","video/mp4");
-	$visitor_msg = strip_tags( addslashes($_POST['visitor_msg'] ) );
+	$visitor_msg = htmlspecialchars( addslashes( $_POST['visitor_msg'] ), ENT_QUOTES, 'UFT-8' );
   $errors = array();
   $data = array();
+
+  $allowedExts = array("mp4", "jpeg", "jpg", "png");
+  $extension = end(explode(".", $_FILES["upload_file"]["name"]));
+
 
   /*
     Server Side Validation on form inputs
@@ -25,13 +29,18 @@
 		}
 	}
 
-  if( !empty ( $visitor_msg) ) {
+  if( !empty ( $visitor_msg ) ) {
+
+    if ( !empty( $visitor_msg ) &&  !preg_match('/^[a-zA-Z ]*$/', $visitor_msg ) ) { 
+
+      $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please enter valid comment");
+
+    }
+
     if( strlen( $visitor_msg ) > 250 ){
       $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Only 250 characters are allowed");
     }
   }
-
-  //print '<pre>';print_r( $_FILES );die(' rs');
 
   if ( trim( $_POST['visitor_msg'] ) == '' && ( $_FILES['upload_file']['size'] == 0 && $_FILES['upload_file']['name'] == '' ) ) {
     $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please add your comment or upload image/video!");
@@ -69,6 +78,15 @@
       	if(!( ($imageType==$match[0]) || ($imageType==$match[1]) || ($imageType==$match[2]) || ($imageType==$match[3]) )) {
         		$errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please upload image or video files only!");
       	}
+
+        if( !in_array($extension, $allowedExts) ) {
+          $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please upload image or video files only!");
+        }
+
+        $pos = strpos($_FILES['upload_file']['name'],'php');
+        if(!($pos === false)) {
+          $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please upload image or video files only!");
+        }
     	}
   }
 
@@ -100,20 +118,21 @@
 
       $visitorName = strtolower( str_replace('', '_', $_POST['vistior_name']) );
       $imageSplit=explode('.',$_FILES['upload_file']['name']);
-      $newImageFileName = $imageSplit[0].'_'.$visitorName.'_'.date('y-m-d-s').'.'.$imageSplit[1];
+      $newImageFileName = $imageSplit[0].'_'.$visitorName.'_'.date('y-m-d-s').'.'.$extension;
       $ImageFilePath = $target_dir . $newImageFileName;
       //echo $ImageFilePath;die('s');
     } else {
 	    $newImageFileName = '';
     } 
-   
+  
     if (move_uploaded_file($_FILES["upload_file"]["tmp_name"], $ImageFilePath)) { 
+
       $upload = $mysqli->prepare("INSERT INTO visitor (firstname, email, message, image, document_type) VALUES (?, ?, ?, ?, ?)");
-	    $upload->bind_param("sssss", $_POST['vistior_name'], $_POST['vistior_email'], $_POST['visitor_msg'], $newImageFileName, $document_type);
+	    $upload->bind_param("sssss", $_POST['vistior_name'], $_POST['vistior_email'], $visitor_msg, $newImageFileName, $document_type);
 	    $upload->execute();
     } else {
       $upload = $mysqli->prepare("INSERT INTO visitor (firstname, email, message, document_type) VALUES (?, ?, ?, ?)");
-	    $upload->bind_param("ssss", $_POST['vistior_name'], $_POST['vistior_email'], $_POST['visitor_msg'], $document_type);
+	    $upload->bind_param("ssss", $_POST['vistior_name'], $_POST['vistior_email'], $visitor_msg, $document_type);
 	    $upload->execute();
     }
 
