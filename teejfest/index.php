@@ -11,7 +11,7 @@
     $token_value = $csrf->get_token($token_id);
 
     $ip_address = get_client_ip();
-    //$confirm = confirmIPAddress( $mysqli, $ip_address );
+    $confirm = confirmIPAddress( $mysqli, $ip_address );
 
     $uid = $_SESSION['login_user'];
     if((isset($uid))){
@@ -36,20 +36,20 @@
             $errors['password'] = "Please enter password!";
         }
         
-        /* if( empty( $_POST['captcha'] )) {
+         if( empty( $_POST['captcha'] )) {
             $errors['captcha_error'] = "Please fill your captcha code";
         }
           
         if( !empty( $_POST['captcha'] ) && $_POST['captcha'] != $_SESSION["captcha_code"] ) {
             $errors['incorrect_captcha'] = "Your Captcha code is incorrect";
-        }*/
+        }
 	
 	    $csrf = new csrf(); 
         // Generate Token Id and Valid
         $token_id = $csrf->get_token_id();
         $token_value = $csrf->get_token($token_id);
         if(!$csrf->check_valid('post')) {
-           //  $errors['incorrect_code'] = "There is some issue in special code!";
+           //$errors['incorrect_code'] = "There is some issue in special code!";
         }
         
         if( count( $errors ) > 0 ) {
@@ -96,7 +96,7 @@
             }else{
 
                 /* Default vars */
-              //  addLoginAttempt( $mysqli, $ip_address );
+                addLoginAttempt( $mysqli, $ip_address );
                 /* err msg */
                 $errors['wrong_password'] = "Your Login Name or Password is invalid";
                 $_SESSION['validations'] = $errors;
@@ -153,10 +153,10 @@
                                 $_SESSION['validations']='';
 							}
 
-                            // if( isset( $_SESSION['Denied'] ) ) {
-                            //     echo '<li>'.$_SESSION['Denied'].'</li>';  
-                            //     unset( $_SESSION['Denied'] );
-                            // }
+                            if( isset( $_SESSION['Denied'] ) ) {
+                                echo '<li>'.$_SESSION['Denied'].'</li>';  
+                                unset( $_SESSION['Denied'] );
+                            }
                             
 						?>
 					</ul>
@@ -167,10 +167,10 @@
                     <div class="form-group">
                         <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off"  />
                     </div>
-                    <!--<div class="form-group">
+                    <div class="form-group">
                         <input type="text" name="captcha" id="captcha" class="form-control" placeholder="captcha" />
                         <img id="captcha_code" src="../captcha.php" />
-                    </div>-->
+                    </div>
 		            <input type="hidden" name="<?php echo $token_id; ?>" value="<?php echo $token_value; ?>" />
                     <?php //} ?>
                 </div>

@@ -20,7 +20,6 @@
         require_once 'inc/script.php'; 
     ?>
     <div id="popupContent" class="modal fade" role="dialog">
-
     </div>
 </body>
 </html>
