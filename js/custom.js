@@ -19,9 +19,9 @@ function share_teej_form() {
 		share += '<div class="modal-dialog modal-lg">';
 		    share += '<div class="modal-content aboutpopup">';
 		      	share += '<div class="modal-header">';
-					share += '<img src="images/top_image.png" alt="" />';
+					share += '<img src="'+siteURL+'/images/top_image.png" alt="" />';
 					share += '<button type="button" class="close" data-dismiss="modal">';
-						share += '<img src="images/cross-image.png" alt="" />';
+						share += '<img src="'+siteURL+'/images/cross-image.png" alt="" />';
 					share += '</button>';
 					share += '<h4>SHARE YOUR TEEJ TAIYYARI</h4>';
 		      	share += '</div>';
@@ -58,7 +58,7 @@ function share_teej_form() {
 				  	share += '</div>';
 		      	share += '</div>';
 		      	share += '<div class="modal-footer">';
-					share += '<img src="images/bottom_image.png" alt="" />';
+					share += '<img src="'+siteURL+'/images/bottom_image.png" alt="" />';
 		      	share += '</div>';
 		    share += '</div>';
 		share += '</div>';
@@ -85,6 +85,7 @@ jQuery(document).ready(function($) {
             dataType: 'json',
             url: siteURL+'/upload_data.php',
             data: form_data,
+            crossOrigin: true,
             contentType: false,
             cache: false,
             processData:false,
@@ -158,6 +159,7 @@ function menu( name ) {
 	$.ajax({
         type: "Post",
         data: {'slug':  name },
+        crossOrigin: true,
         url: siteURL+'/content.php',
         dataType: 'json',
         beforeSend: function() {
@@ -204,6 +206,7 @@ function user_popup( siteUrl, id ) {
         type: "Post",
         data: {'id': id},
         url: siteURL+'/user_content.php',
+        crossOrigin: true,
         dataType: 'json',
         success: function (json) {
             getPopup( 'user', json );
@@ -221,9 +224,9 @@ function getPopup( type, data ) {
   	html += '<div class="modal-dialog modal-lg">';
     	html += '<div class="modal-content aboutpopup">';
       		html += '<div class="modal-header">';
-				html += '<img src="images/top_image.png" alt="" />';
+				html += '<img src="'+siteURL+'/images/top_image.png" alt="" />';
 				html += '<button type="button" class="close" data-dismiss="modal">';
-				html += '<img src="images/cross-image.png" alt="" /></button>';
+				html += '<img src="'+siteURL+'/images/cross-image.png" alt="" /></button>';
 
 				switch( type ) {
 					case "menu":
@@ -277,7 +280,7 @@ function getPopup( type, data ) {
 			  	html += '</div>';
 		    html += '</div>';
       		html += '<div class="modal-footer">';
-				html += '<img src="images/bottom_image.png" alt="" />';
+				html += '<img src="'+siteURL+'/images/bottom_image.png" alt="" />';
       		html += '</div>';
     	html += '</div>';
   	html += '</div>';
@@ -292,6 +295,7 @@ function recent_posts() {
         type: "POST",
         data: {'a': 'b'},
         url: siteURL+'/recent_post.php',
+        crossOrigin: true,
         dataType: 'json',
         beforeSend: function() {
             $('#recent_posts').after('<span class="wait2"><img src="'+siteURL+'/images/ajax-loader.gif" alt="loading" class="wait" /></span>');
@@ -316,6 +320,7 @@ $(document).on('click', '.loadmore', function (e) {
         data: {
             page: $('#result_no').val()
         },
+        crossOrigin: true,
         dataType: 'json',
         success: function (json) {
             if (json.message != '') {

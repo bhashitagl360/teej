@@ -1,6 +1,6 @@
 <?php 
 	for( $j=0; $j<count($js); $j++) {
-		echo '<script type="text/javascript" src="'. $js[$j] .'"></script>';
+		echo '<script type="text/javascript" src="'. siteUrl.'/'.$js[$j] .'"></script>';
 	}
 ?>
 <script type="text/javascript">
