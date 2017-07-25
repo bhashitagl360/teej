@@ -13,5 +13,12 @@ FileETag None
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule ^upload/(.)$ /$1 [R=301,NC,L]
-#RewriteRule ^inc/(.*)$ / [R=301,NC,L]
+#RewriteRule ^/teejfest/inc/(.*)$ / [R=301,NC,L]
 </IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^teejfest/inc/(.*) $1 [L]
+</IfModule>
+
+
