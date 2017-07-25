@@ -3,14 +3,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0 user-scalable=0">
 	<link rel="shortcut icon" href="http://localhost/teej/images/favicon.ico" type="image/x-icon">
 	<title>Teej Taiyyari | Rajasthan Tourism</title>
-	<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet"><link href="css/reset.css" type="text/css" rel="stylesheet"><link href="css/style.css" type="text/css" rel="stylesheet"></head>
+	<link href="<?php echo siteUrl;?>/css/bootstrap.min.css" type="text/css" rel="stylesheet"><link href="css/reset.css" type="text/css" rel="stylesheet"><link href="css/style.css" type="text/css" rel="stylesheet"></head>
 
 <body>
     <section class="bannerbox">
 	<header>
 		<div class="col-xs-12">
 			<div class="logo">
-				<a href="javascript:void(0);"><img src="images/logo.png" alt="TeejTaiyyari"></a>
+				<a href="javascript:void(0);"><img src="<?php echo siteUrl;?>/images/logo.png" alt="TeejTaiyyari"></a>
 			</div>
 
 		</div>
@@ -30,10 +30,10 @@
 		</div>
 	  
 		<div class="carousel-caption">
-			<p onclick="share_teej_form();">Shuru Karo #TeejTaiyyari</p>
+
 		</div>
 		<div class="dummyimage">
-			<img src="images/banner_below.png" alt="">
+			<img src="<?php echo siteUrl;?>/images/banner_below.png" alt="">
 		</div>
 	</div>
 </section>
