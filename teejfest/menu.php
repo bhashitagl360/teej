@@ -3,7 +3,7 @@
 
     $id = '0';
     if( isset( $_GET['id'] ) &&  !empty( $_GET['id'] ) ) {
-       $id =  ( int ) $_GET['id'];
+       $id =  ( int ) base64_decode( $_GET['id'] );
     }
 
     if( !empty( $id ) ) {

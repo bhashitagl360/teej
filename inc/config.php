@@ -15,14 +15,15 @@
         ***************************************************
     */
 
-        define('siteUrl', 'http://teej.yofroggy.biz');
+    define('siteUrl', 'http://teej.yofroggy.biz');
 	define('siteAdminUrl', 'http://teej.yofroggy.biz/teejfest');
-	$connection = array(
-            'h' => 'localhost',
-            'u' => 'teej_dbuser',
-            'p' => 'UX4Dop!q_MhnQ',
-            'd' => 'teej_db',
-        );
+
+    $connection = array(
+        'h' => 'localhost',
+        'u' => 'teej_dbuser',
+        'p' => 'UX4Dop!q_MhnQ',
+        'd' => 'teej_db',
+    );
 
     /*
         ***************************************************
@@ -67,3 +68,4 @@
     }
     
 ?>
+

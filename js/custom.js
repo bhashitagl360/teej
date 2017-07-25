@@ -46,7 +46,7 @@ function share_teej_form() {
 								share += '</div>';
 							share += '</div>';
 							share += '<div class="lefttextbox">';
-								share += '<input type="text" name="captcha" id="captcha" placeholder="captcha" /><img id="captcha_code" src="captcha.php" />';
+								//share += '<input type="text" name="captcha" id="captcha" placeholder="captcha" /><img id="captcha_code" src="captcha.php" />';
 							share += '</div>';
 							share += '<span id="buttonApply"><input class="submitbtn" type="submit" value="Submit" id="confirm-upload" /></span>';
 					  	share += '</div>';
