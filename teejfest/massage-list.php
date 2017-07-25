@@ -1,4 +1,10 @@
-<?php require_once "inc/admin.php"; ?>
+<?php 
+  require_once "inc/admin.php";
+  require_once "../csrf.class.php";
+  $csrf = new csrf();
+  $token_id = $csrf->get_token_id();
+  $token_value = $csrf->get_token($token_id);
+?>
 <!DOCTYPE html>
 <html>
     <?php require_once 'inc/meta.php'; ?>
@@ -37,9 +43,9 @@
                                                     </div>
 
                                                     <div class="right_icon">
-                                                        <a href="javascript:void(0);" class="icon-btn" title="Delete" onclick="deleteMessage('<?php echo $postID; ?>');"><i class="fa fa-trash"></i></a>
-                                                        <a href="javascript:void(0);" <?php echo ($status == 1) ? '' : "style='display:none'" ?> class="icon-btn" title="Inactive" id="inactive_<?php echo $postID; ?>" onclick="inactiveMessage('<?php echo $postID; ?>');"><i class="fa fa-close"></i></a>
-                                                        <a href="javascript:void(0);" <?php echo ($status == 0) ? '' : "style='display:none'" ?> class="icon-btn" title="Active" id="active_<?php echo $postID; ?>" onclick="activeMessage('<?php echo $postID; ?>');"><i class="fa fa-check"></i></a>
+                                                        <a href="javascript:void(0);" class="icon-btn" title="Delete" onclick="deleteMessage('<?php echo $postID; ?>', '<?php echo $token_id; ?>', '<?php echo $token_value; ?>');"><i class="fa fa-trash"></i></a>
+                                                        <a href="javascript:void(0);" <?php echo ($status == 1) ? '' : "style='display:none'" ?> class="icon-btn" title="Inactive" id="inactive_<?php echo $postID; ?>" onclick="inactiveMessage('<?php echo $postID; ?>', '<?php echo $token_id; ?>', '<?php echo $token_value; ?>');"><i class="fa fa-close"></i></a>
+                                                        <a href="javascript:void(0);" <?php echo ($status == 0) ? '' : "style='display:none'" ?> class="icon-btn" title="Active" id="active_<?php echo $postID; ?>" onclick="activeMessage('<?php echo $postID; ?>', '<?php echo $token_id; ?>', '<?php echo $token_value; ?>');"><i class="fa fa-check"></i></a>
                                                         <?php 
                                                             switch( $rs['document_type'] ) {
                                                                 case "text":
@@ -86,6 +92,7 @@
                                     <?php } } ?>
                                 </ul>
                                 <input type="hidden" id="result_no" value="10">
+                                <input type="hidden" id="resluts_tag" name="<?php echo $token_id; ?>" value="<?php echo $token_value; ?>" />
                                 <li class="loadbutton">
                                     <button class="loadmore" >Load More</button>
                                 </li>
@@ -123,103 +130,92 @@
             });
           });
           
-          function deleteMessage(id){
-//            alert(id);
-            var data = {"id":id};
-              swal({
-              title: "Are you sure?",
-              text: "You want to delete this message!",
-              type: "warning",
-              showCancelButton: true,
-              confirmButtonColor: "#DD6B55",
-              confirmButtonText: "Yes, delete it!",
-              closeOnConfirm: false
-            },
-            function(isConfirm){
-             if (isConfirm) {
-                 $.ajax({
-                   url: 'delete-message.php',
-                   type: 'POST',
-                   data: data,
-                   success: function(response){
-                       if(response == 1){
-                          swal("Deleted!", "Your message has been deleted.", "success"); 
-                          $('#main_'+id).remove();
-                        }else{
-                          swal("Try again", "Something went wrong:)", "error");
-                        }
-                   }
-                 });
-             } 
-             
-            });
+          function deleteMessage( id, a, b ) {
+
+            var txt;
+            var r = confirm("Are you sure to delete the message!");
+            if (r == true) {
+
+                var data = {"id":id, "a":a, "b":b};
+                $.ajax({
+                  url: 'delete-message.php',
+                  type: 'POST',
+                  data: data,
+                  success: function(response){
+                    if(response == 1){
+                      alert( "Your message has been deleted." ); 
+                      $('#main_'+id).remove();
+                    }else{
+                      alert("Try again: Something went wrong");
+                    }
+                  }
+                });
+
+                return true;
+
+            } else {
+                return false;
+            }
           }
           
           
-          function inactiveMessage(id){
-//            alert(id);
-            var data = {"id":id};
-              swal({
-              title: "Are you sure?",
-              text: "You want to inactive this message!",
-              type: "warning",
-              showCancelButton: true,
-              confirmButtonColor: "#DD6B55",
-              confirmButtonText: "Yes, inactive it!",
-              closeOnConfirm: false
-            },
-            function(isConfirm){
-             if (isConfirm) {
-                 $.ajax({
-                   url: 'inactive-message.php',
-                   type: 'POST',
-                   data: data,
-                   success: function(response){
-                       if(response == 1){
-                          swal("Inactivated!", "Message has been inactivated.", "success"); 
-                          $('#inactive_'+id).hide();
-                          $('#active_'+id).show();
-                        }else{
-                          swal("Try again", "Something went wrong:)", "error");
-                        }
-                   }
-                 });
-             } 
-             
-            });
+          function inactiveMessage( id, a, b ){
+
+
+            var txt;
+            var r = confirm("Are you sure to deactivate the message!");
+            if (r == true) {
+                
+                var data = {"id":id, "a":a, "b":b};
+                $.ajax({
+                  url: 'inactive-message.php',
+                  type: 'POST',
+                  data: data,
+                  success: function(response){
+                    if(response == 1){
+                      alert( "Message has been inactivated." ); 
+                      $('#inactive_'+id).hide();
+                      $('#active_'+id).show();
+                    }else{
+                      alert("Try again: Something went wrong");
+                    }
+                  }
+                });
+
+                return true;
+
+            } else {
+                return false;
+            }
           }
           
-          function activeMessage(id){
-//            alert(id);
-            var data = {"id":id};
-              swal({
-              title: "Are you sure?",
-              text: "You want to active this message!",
-              type: "warning",
-              showCancelButton: true,
-              confirmButtonColor: "#DD6B55",
-              confirmButtonText: "Yes, active it!",
-              closeOnConfirm: false
-            },
-            function(isConfirm){
-             if (isConfirm) {
-                 $.ajax({
-                   url: 'active-message.php',
-                   type: 'POST',
-                   data: data,
-                   success: function(response){
-                       if(response == 1){
-                          swal("Activated!", "Message has been activated.", "success"); 
-                          $('#inactive_'+id).show();
-                          $('#active_'+id).hide();
-                        }else{
-                          swal("Try again", "Something went wrong:)", "error");
-                        }
-                   }
-                 });
-             } 
-             
-            });
+          function activeMessage( id, a, b ) {
+
+            var txt;
+            var r = confirm("Are you sure to activate the message!");
+            if (r == true) {
+                
+                var data = {"id":id, "a":a, "b":b};
+                $.ajax({
+                  url: 'active-message.php',
+                  type: 'POST',
+                  data: data,
+                  success: function(response){
+                    if(response == 1){
+                      alert( "Message has been activated." ); 
+                      $('#inactive_'+id).show();
+                      $('#active_'+id).hide();
+                    }else{
+                      alert("Try again: Something went wrong");
+                    }
+                  }
+                });
+
+                return true;
+
+            } else {
+                return false;
+            }
           }
     </script>
     </body>

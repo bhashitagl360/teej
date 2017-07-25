@@ -1,10 +1,11 @@
 <?php
 	require_once "../inc/config.php";
+    
     $uid = $_SESSION['login_user'];
     if(!(isset($uid))){
          header("location: index.php");
          exit();
-    }
+    }    
 
     $role_id = $_SESSION['role_id'];
 
