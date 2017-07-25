@@ -3,11 +3,11 @@
 
   if(isset($_GET['deletetrue'])) { 
     if($_GET['deletetrue'] == "true") { 
-       $delete = $mysqli->prepare("DELETE FROM menu WHERE id = ?");
-        $delete->bind_param('i', $_GET['DelId']);
+        $idIs = base64_decode( $_GET['DelId'] );
+        $delete = $mysqli->prepare("DELETE FROM menu WHERE id = ?");
+        $delete->bind_param('i',  $idIs);
         $delete->execute(); 
         $delete->close();
-
         if($upload === false) {
             $msg='Wrong Menu delete SQL: ' . $menuSqlQuery . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error;
         } else {
@@ -75,11 +75,11 @@
                                           <td><?php echo $row['position']; ?></td>
                                           <td><?php echo $row['created_by']; ?></td>
                                           <td>
-                                            <a href="menu.php?id=<?php echo $row['id']; ?>">
+                                            <a href="menu.php?id=<?php echo base64_encode( $row['id'] ); ?>">
                                               Update
                                             </a>
                                             |
-                                            <a href="menu_list.php?DelId=<?php echo $row['id']; ?>&deletetrue=true" onClick="return askme();">
+                                            <a href="menu_list.php?DelId=<?php echo base64_encode( $row['id'] ); ?>&deletetrue=true" onClick="return askme();">
                                               Delete
                                             </a>
                                           </td>

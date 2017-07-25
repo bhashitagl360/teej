@@ -30,7 +30,7 @@
 		</div>
 	  
 		<div class="carousel-caption">
-			<p onclick="share_teej_form('http://localhost/teej');">Shuru Karo #TeejTaiyyari</p>
+			<p onclick="share_teej_form();">Shuru Karo #TeejTaiyyari</p>
 		</div>
 		<div class="dummyimage">
 			<img src="images/banner_below.png" alt="">
