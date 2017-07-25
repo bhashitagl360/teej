@@ -15,15 +15,15 @@
         ***************************************************
     */
 
-        define('siteUrl', 'http://localhost/teej');
+    define('siteUrl', 'http://localhost/teej');
 	define('siteAdminUrl', 'http://localhost/teej/teejfest');
 
-        $connection = array(
-            'h' => 'localhost',
-            'u' => 'root',
-            'p' => 'root',
-            'd' => 'teej',
-        );
+    $connection = array(
+        'h' => 'localhost',
+        'u' => 'root',
+        'p' => '',
+        'd' => 'teej',
+    );
 
     /*
         ***************************************************
