@@ -50,13 +50,13 @@
     }
   }
 	
-  if( empty( $_POST['captcha'] )) {
-      $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please fill your captcha code");
-  }
+ // if( empty( $_POST['captcha'] )) {
+    //  $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please fill your captcha code");
+ // }
 
-  if( !empty( $_POST['captcha'] ) && $_POST['captcha'] != $_SESSION["captcha_code"] ) {
-      $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Your Captcha code is incorrect");
-  }
+  //if( !empty( $_POST['captcha'] ) && $_POST['captcha'] != $_SESSION["captcha_code"] ) {
+     // $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Your Captcha code is incorrect");
+  //}
     
   if( $_FILES['upload_file']['size'] > 0 && $_FILES['upload_file']['name'] != '') {
 

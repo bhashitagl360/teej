@@ -14,14 +14,15 @@
             Connection Vars
         ***************************************************
     */
-    define('siteUrl', 'http://teej.yofroggy.biz');
-	define('siteAdminUrl', 'http://teej.yofroggy.biz/teejfest');
-	$connection = array(
-            'h' => 'localhost',
-            'u' => 'root',
-            'p' => '',
-            'd' => 'teej',
-        );
+    define('siteUrl', 'http://localhost/teej');
+    define('siteAdminUrl', 'http://localhost/teej/teejfest');
+
+    $connection = array(
+        'h' => 'localhost',
+        'u' => 'root',
+        'p' => '',
+        'd' => 'teej',
+    );
 
     /*
         ***************************************************

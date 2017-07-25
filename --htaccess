@@ -1,0 +1,17 @@
+#Options -Indexes
+RewriteEngine On
+ErrorDocument 404 /404.php
+
+#Advanced Cookie Manager
+<IfModule php5_module>
+    php_flag session.cookie_httponly on
+    php_flag session.use_only_cookies on
+</IfModule>
+
+FileETag None
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^upload/(.)$ /$1 [R=301,NC,L]
+#RewriteRule ^inc/(.*)$ / [R=301,NC,L]
+</IfModule>

@@ -7,7 +7,7 @@
 			<div class="menubx">
 				<?php
 
-					$menuQuery = "SELECT name, slug FROM menu order by position";
+					$menuQuery = "SELECT name, slug FROM menu order by position limit 5";
 
 					/* prepare statement */
 					$menu = $mysqli->prepare( $menuQuery );
