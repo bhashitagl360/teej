@@ -3,12 +3,11 @@
 
   if(isset($_GET['deletetrue'])) { 
     if($_GET['deletetrue'] == "true") { 
- 	$idIs = base64_decode( $_GET['DelId'] );  
+        $idIs = base64_decode( $_GET['DelId'] );
         $delete = $mysqli->prepare("DELETE FROM menu WHERE id = ?");
-        $delete->bind_param('i', $idIs);
+        $delete->bind_param('i',  $idIs);
         $delete->execute(); 
         $delete->close();
-
         if($upload === false) {
             $msg='Wrong Menu delete SQL: ' . $menuSqlQuery . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error;
         } else {

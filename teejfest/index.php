@@ -11,7 +11,7 @@
     $token_value = $csrf->get_token($token_id);
 
     $ip_address = get_client_ip();
-//    $confirm = confirmIPAddress( $mysqli, $ip_address );
+    //$confirm = confirmIPAddress( $mysqli, $ip_address );
 
     $uid = $_SESSION['login_user'];
     if((isset($uid))){
@@ -36,7 +36,7 @@
             $errors['password'] = "Please enter password!";
         }
         
-       /* if( empty( $_POST['captcha'] )) {
+        /* if( empty( $_POST['captcha'] )) {
             $errors['captcha_error'] = "Please fill your captcha code";
         }
           
@@ -44,21 +44,12 @@
             $errors['incorrect_captcha'] = "Your Captcha code is incorrect";
         }*/
 	
-	$csrf = new csrf(); 
+	    $csrf = new csrf(); 
         // Generate Token Id and Valid
         $token_id = $csrf->get_token_id();
         $token_value = $csrf->get_token($token_id);
         if(!$csrf->check_valid('post')) {
            //  $errors['incorrect_code'] = "There is some issue in special code!";
-        }
-
-        $csrf = new csrf();
- 
-        // Generate Token Id and Valid
-        $token_id = $csrf->get_token_id();
-        $token_value = $csrf->get_token($token_id);
-        if(!$csrf->check_valid('post')) {
-             //$errors['incorrect_code'] = "There is some issue in special code!";
         }
         
         if( count( $errors ) > 0 ) {
@@ -150,7 +141,8 @@
                 <div class="body bg-gray">
 					<ul>
 						<?php
-							//print '<pre>';print_r($_SESSION);die;    
+							
+
 							if( count( $_SESSION['validations'] ) > 0 ) {
 								foreach ( $_SESSION['validations'] as $validation ) {
                                     if( !empty ( $validation ) ) {
@@ -161,15 +153,14 @@
                                 $_SESSION['validations']='';
 							}
 
-                            if( isset( $_SESSION['Denied'] ) ){
-
-                                 echo '<li>'.$_SESSION['Denied'].'</li>';  
-                                unset( $_SESSION['Denied'] );
-                            }
+                            // if( isset( $_SESSION['Denied'] ) ) {
+                            //     echo '<li>'.$_SESSION['Denied'].'</li>';  
+                            //     unset( $_SESSION['Denied'] );
+                            // }
                             
 						?>
 					</ul>
-                    <?php if( $_SESSION['attempts_denied'] != 1 ) {?> 
+                    <?php //if( $_SESSION['attempts_denied'] != 1 ) {?> 
                     <div class="form-group">
                         <input type="text" name="username" class="form-control" placeholder="User Name" autocomplete="off" />
                     </div>
@@ -180,9 +171,8 @@
                         <input type="text" name="captcha" id="captcha" class="form-control" placeholder="captcha" />
                         <img id="captcha_code" src="../captcha.php" />
                     </div>-->
-		    <input type="hidden" name="<?php echo $token_id; ?>" value="<?php echo $token_value; ?>" />
-                    </div>
-                    <?php } ?>
+		            <input type="hidden" name="<?php echo $token_id; ?>" value="<?php echo $token_value; ?>" />
+                    <?php //} ?>
                 </div>
                 <div class="footer">
                     <button type="submit" class="btn bg-olive btn-block">Sign me in</button>

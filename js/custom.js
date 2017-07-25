@@ -311,7 +311,7 @@ function recent_posts() {
 }
 
 
-$(document).on('click', '.loadmore', function (e) {	
+$(document).on('click', '.loadmore', function (e) {
 	e.stopImmediatePropagation();
    	e.preventDefault();
     $.ajax({
