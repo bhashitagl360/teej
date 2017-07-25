@@ -1,8 +1,18 @@
 <?php 
-  require_once "inc/admin.php"; 
+  require_once "inc/admin.php";
+  require_once "../csrf.class.php";
+
+  $csrf = new csrf();
+  $token_id = $csrf->get_token_id();
 
   if(isset($_GET['deletetrue'])) { 
-    if($_GET['deletetrue'] == "true") { 
+    if($_GET['deletetrue'] == "true") {
+      
+        if( $_SESSION[token_id] != $_GET['token_id'] ) {
+          header("location: dashboard.php");
+          exit();
+        }
+
         $idIs = base64_decode( $_GET['DelId'] );
         $delete = $mysqli->prepare("DELETE FROM menu WHERE id = ?");
         $delete->bind_param('i',  $idIs);
@@ -10,9 +20,15 @@
         $delete->close();
         if($upload === false) {
             $msg='Wrong Menu delete SQL: ' . $menuSqlQuery . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error;
+            header("location: menu_list.php");
+            exit();
         } else {
             $msg="Sucessfully Delete the row!";
+            header("location: menu_list.php");
+            exit();
         }
+
+
     }
   }
 
@@ -79,7 +95,7 @@
                                               Update
                                             </a>
                                             |
-                                            <a href="menu_list.php?DelId=<?php echo base64_encode( $row['id'] ); ?>&deletetrue=true" onClick="return askme();">
+                                            <a href="menu_list.php?DelId=<?php echo base64_encode( $row['id'] ); ?>&deletetrue=true&token_id=<?php echo $token_id; ?>" onClick="return askme();">
                                               Delete
                                             </a>
                                           </td>
