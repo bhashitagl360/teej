@@ -14,6 +14,7 @@
             Connection Vars
         ***************************************************
     */
+
         define('siteUrl', 'http://localhost/teej');
 	define('siteAdminUrl', 'http://localhost/teej/teejfest');
 
@@ -23,6 +24,7 @@
             'p' => 'root',
             'd' => 'teej',
         );
+
     /*
         ***************************************************
             Site Global Vars

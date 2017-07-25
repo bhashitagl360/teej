@@ -2,7 +2,7 @@
 	<header >
 		<div class="col-xs-12" >
 			<div class="logo">
-				<a href="javascript:void(0);"><img src="images/logo.png" alt="TeejTaiyyari" /></a>
+				<a href="javascript:void(0);"><img src="<?php echo siteUrl; ?>/images/logo.png" alt="TeejTaiyyari" /></a>
 			</div>
 			<div class="menubx">
 				<?php
@@ -54,19 +54,19 @@
 	  	<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-			  <img src="images/1.jpg" alt="" class="bannerimage" />		
+			  <img src="<?php echo siteUrl; ?>/images/1.jpg" alt="" class="bannerimage" />		
 				
 			</div>
 			<div class="item">
-			  <img src="images/2.jpg" alt="" class="bannerimage" />		
+			  <img src="<?php echo siteUrl; ?>/images/2.jpg" alt="" class="bannerimage" />		
 				
 			</div>
 			<div class="item">
-			  <img src="images/banner3.jpg" alt="" class="bannerimage" />		
+			  <img src="<?php echo siteUrl; ?>/images/banner3.jpg" alt="" class="bannerimage" />		
 				
 			</div>
 			<div class="item">
-			  <img src="images/banner4.jpg" alt="" class="bannerimage" />		
+			  <img src="<?php echo siteUrl; ?>/images/banner4.jpg" alt="" class="bannerimage" />		
 				
 			</div>
 		</div>
@@ -75,7 +75,7 @@
 			<p onclick="share_teej_form();">Shuru Karo #TeejTaiyyari</p>
 		</div>
 		<div class="dummyimage">
-			<img src="images/banner_below.png" alt="" />
+			<img src="<?php echo siteUrl; ?>/images/banner_below.png" alt="" />
 		</div>
 	</div>
 </section>
