@@ -1,4 +1,12 @@
-<?php require_once 'inc/config.php'; ?>
+<?php require_once 'inc/config.php'; 
+$curr_url = "http://". $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$site = siteUrl;
+if($curr_url== $site.'/index.php')
+{
+header("HTTP/1.1 301 Moved Permanently");
+header("location: ".siteUrl);
+}
+?>
 <!doctype html>
 <html>
 <?php require_once 'inc/meta.php'; ?>
