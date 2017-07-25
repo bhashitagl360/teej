@@ -1,5 +1,8 @@
 #Options -Indexes
+<<<<<<< HEAD
 
+=======
+>>>>>>> 12d7470643d9905b4433a3314d61e41f11091f00
 RewriteEngine On
 ErrorDocument 404 /404.php
 

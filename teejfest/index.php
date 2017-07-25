@@ -52,6 +52,15 @@
            //  $errors['incorrect_code'] = "There is some issue in special code!";
         }
 
+        $csrf = new csrf();
+ 
+        // Generate Token Id and Valid
+        $token_id = $csrf->get_token_id();
+        $token_value = $csrf->get_token($token_id);
+        if(!$csrf->check_valid('post')) {
+             //$errors['incorrect_code'] = "There is some issue in special code!";
+        }
+        
         if( count( $errors ) > 0 ) {
             $_SESSION['validations'] = $errors;
             header("location: dashboard.php");
@@ -172,6 +181,7 @@
                         <img id="captcha_code" src="../captcha.php" />
                     </div>-->
 		    <input type="hidden" name="<?php echo $token_id; ?>" value="<?php echo $token_value; ?>" />
+                    </div>
                     <?php } ?>
                 </div>
                 <div class="footer">
