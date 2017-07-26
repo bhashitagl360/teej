@@ -31,7 +31,7 @@
 
   if( !empty ( $visitor_msg ) ) {
 
-    if ( !empty( $visitor_msg ) &&  !preg_match('/^[a-zA-Z ]*$/', $visitor_msg ) ) { 
+    if ( !empty( $visitor_msg ) &&  !preg_match('/^[a-zA-Z,.#!\r\n\s]*$/', $visitor_msg ) ) { 
 
       $errors[] = array("status"=>0, "id"=>"other_place", "message"=>"Please enter valid comment");
 

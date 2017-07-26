@@ -6,8 +6,8 @@
 
     $visitorQuery = "SELECT id, firstname, email, message, image, document_type 
                      FROM visitor
-                     WHERE deleted=0 
-                     AND status=1 
+                     WHERE deleted=0
+                     AND status=1
                      ORDER BY id DESC
                      LIMIT 10";
 

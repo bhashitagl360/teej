@@ -1,6 +1,7 @@
 <?php
 
 	require_once "inc/admin.php";
+
 	$messageId = $_POST['id'];
 	$a = $_POST['a'];
 	$b = $_POST['b'];
@@ -15,7 +16,7 @@
       exit();
     }
 
-	$sql = "UPDATE visitor SET deleted=1 WHERE id='$messageId'";
+	$sql = "UPDATE visitor SET deleted=1 WHERE id=$messageId";
 
 	if ($mysqli->query($sql) === TRUE) {
 	    echo 1;
