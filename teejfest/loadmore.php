@@ -45,15 +45,15 @@
                         
                             switch( $data['document_type'] ) {
                                 case "text":
-                                    echo '<img src="' . siteUrl . '/images/text-image.png" alt="' . $firstname . '" />';
+                                    $html .= '<img src="' . siteUrl . '/images/text-image.png" alt="' . $firstname . '" />';
                                 break;
 
                                 case "image":
-                                    echo '<img src="' . siteUrl . '/images/photoicon.png" alt="' . $firstname . '" />';
+                                    $html .= '<img src="' . siteUrl . '/images/photoicon.png" alt="' . $firstname . '" />';
                                 break;
 
                                 case "video":
-                                    echo '<img src="' . siteUrl . '/images/videoicon.png" alt="' . $firstname . '" />';
+                                    $html .= '<img src="' . siteUrl . '/images/videoicon.png" alt="' . $firstname . '" />';
                                 break;
                             }
                         $html .= '</div>';
